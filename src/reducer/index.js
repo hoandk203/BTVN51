@@ -27,7 +27,7 @@ const reducer = (state, action) => {
                     if (task.id === action.payload.id) {
                         return {
                             ...task,
-                            completed: true,
+                            completed: !task.completed,
                         };
                     }
                     return task;

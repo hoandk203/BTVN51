@@ -11,7 +11,6 @@ export default function TasksList({ tasks, onCompleted }) {
     return (
         <div>
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                {tasks.length === 0 && <Alert severity="info">Chưa có công việc nào</Alert>}
                 {tasks && tasks.map((task, index) => {
                     return <ListItem key={task.id} style={{backgroundColor: task.completed? "#b0cde4" : "", borderRadius:"8px", outline: "1px solid #ccc", marginBottom: "8px"}}>
                         <ListItemAvatar>
@@ -23,6 +22,7 @@ export default function TasksList({ tasks, onCompleted }) {
                         <Button style={{display: "inline-block"}} variant="contained" onClick={() => onCompleted(task.id)}>Completed</Button>
                     </ListItem>
                 })}
+                {tasks.length === 0 && <Alert severity="info">Chưa có công việc nào</Alert>}
             </List>
         </div>
     )

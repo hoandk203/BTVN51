@@ -1,11 +1,9 @@
 export const validate = (taskName) => {
     if (taskName === "") {
-        alert("Vui lòng nhập tên công việc");
-        return false;
+        return "Vui lòng nhập tên công việc";
     }
     if (taskName.length > 50) {
-        alert("Tên công việc không được quá 50 ký tự");
-        return false;
+        return "Tên công việc không được quá 50 ký tự";
     }
-    return true;
+    return false;
 };
