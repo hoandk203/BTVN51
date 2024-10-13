@@ -6,11 +6,12 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-
+import Alert from '@mui/material/Alert';
 export default function TasksList({ tasks, onCompleted }) {
     return (
         <div>
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                {tasks.length === 0 && <Alert severity="info">Chưa có công việc nào</Alert>}
                 {tasks && tasks.map((task, index) => {
                     return <ListItem key={task.id} style={{backgroundColor: task.completed? "#b0cde4" : "", borderRadius:"8px", outline: "1px solid #ccc", marginBottom: "8px"}}>
                         <ListItemAvatar>
