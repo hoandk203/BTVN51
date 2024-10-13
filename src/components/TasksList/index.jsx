@@ -19,7 +19,7 @@ export default function TasksList({ tasks, onCompleted }) {
                         </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary={task.name} style={{wordWrap: "break-word", width: "0"}}/>
-                        <Button style={{display: "inline-block"}} variant="contained" onClick={() => onCompleted(task.id)}>Completed</Button>
+                        <Button style={{display: "inline-block"}} variant="contained" onClick={() => onCompleted(task.id, task)}>Completed</Button>
                     </ListItem>
                 })}
                 {tasks.length === 0 && <Alert severity="info">Chưa có công việc nào</Alert>}

@@ -10,6 +10,7 @@ import { validate } from './validate';
 import Alert from '@mui/material/Alert';
 function App() {
   const [msgError, setMsgError] = useState("");
+  const [msgSuccess, setMsgSuccess] = useState("");
   const [state, dispatch] = useReducer(reducer, {
     tasks: [],
     task: {
@@ -44,19 +45,30 @@ function App() {
     }
     state.task.name = state.task.name.trim().replace("<", "&lt;").replace(">", "&gt;");
     dispatch({action: "tasks/onSave"})
+    setMsgSuccess("Thêm công việc thành công");
   }
 
-  const onCompleted = (id) => {
+  const onCompleted = (id, task) => {
+    if(!task.completed){
+      setMsgSuccess("Công việc đã hoàn thành");
+    }else{
+      setMsgSuccess("Công việc chưa hoàn thành");
+    }
     dispatch({action:"task/onCompleted", payload: {id}})
   }
 
-  setTimeout(() => {
-    setMsgError("");
-  }, 3000);
-
+  useEffect(() => {
+    setTimeout(() => {
+        setMsgError("");
+        setMsgSuccess("");
+    }, 3000);
+}, [msgError, msgSuccess]);
   return (
     <>
       {msgError && <Alert style={{position:"absolute", top: "30px", left: "50%", translate: "-50% 0"}} severity="error">{msgError}</Alert>}
+      {msgSuccess==="Công việc đã hoàn thành" && (<Alert style={{position:"absolute", top: "30px", left: "50%", translate: "-50% 0"}} severity="success">{msgSuccess}</Alert>)}
+      {msgSuccess==="Công việc chưa hoàn thành" && (<Alert style={{position:"absolute", top: "30px", left: "50%", translate: "-50% 0"}} severity="warning">{msgSuccess}</Alert>)}
+      {msgSuccess==="Thêm công việc thành công" && (<Alert style={{position:"absolute", top: "30px", left: "50%", translate: "-50% 0"}} severity="success">{msgSuccess}</Alert>)}
       <div className="container" style={{display: "flex", flexDirection: "column", maxWidth: "500px", margin: "0 auto"}}>
         <h1>Todo List</h1>
         <FormInput onInput={onInput} onSave={onSave} task={state.task}/>
